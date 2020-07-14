@@ -37,7 +37,7 @@ const RepositoryList = (props) => {
                 <ul className="Repository-list">
                     {Object.values(publicList).map((val, key) => {
                         return (
-                            <Repository key={ key } data={ val } token={ props.token }/>
+                            <Repository key={ key } data={ val } token={ props.token } setList={ setPublicList }/>
                         )
                     })}
                 </ul>
@@ -47,7 +47,7 @@ const RepositoryList = (props) => {
                 <ul className="Repository-list">
                     {Object.values(privateList).map((val, key) => {
                         return (
-                            <Repository key={ key } data={ val } token={ props.token }/>
+                            <Repository key={ key } data={ val } token={ props.token } setList={ setPrivateList }/>
                         )
                     })}
                 </ul>
