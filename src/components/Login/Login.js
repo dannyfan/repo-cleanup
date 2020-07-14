@@ -16,7 +16,7 @@ const Login = (props) => {
                 setText(err);
                 return
             }
-            props.setUser(data.token);
+            props.setToken(data.token);
         });
     }
 
