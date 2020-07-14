@@ -4,5 +4,22 @@
 }
 
 .Repository .tag {
-    margin: auto 1em;
+    margin: auto 1em auto 0;
+}
+
+.Repository-container .title {
+    padding: 0em 1em;
+    text-align: center;
+}
+
+.Repository-container .title::after {
+    content: "";
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid black;
+    margin-top: .5em;
+}
+
+.card-footer .button {
+    margin: .5em;
 }

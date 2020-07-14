@@ -8,7 +8,17 @@ const App = () => {
 
   return (
     <div className="App">
-      <Login setToken={ setToken }/>
+      <section className="section">
+        <div className="container">
+          <h1 className="title">Instructions</h1>
+          <p>Authorize github login with the "login" button.</p>
+          <Login setToken={ setToken }/>
+          <p>Click make public/private or delete the repo on each repository. 
+            <br/> 
+          Or drag the repository to the appropiate column for an all at once action instead.
+          </p>
+        </div>
+      </section>
       { token && <RepositoryList token={ token }/> }
     </div>
   )
