@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Login from "../Login";
 import RepositoryList from '../Repository';
-import './App.css';
+import "bulma/css/bulma.css";
 
 const App = () => {
   const [token, setToken] = useState("");

@@ -27,7 +27,7 @@ const RepositoryList = (props) => {
     }, []);
     
     return (
-        <div>{Object.values(repoList).map((val, key) => {
+        <div className="Repository-list">{Object.values(repoList).map((val, key) => {
             return (
                 <Repository key={ key } data={val}/>
             )

@@ -1,0 +1,8 @@
+.Repository {
+    max-width: 500px;
+    margin: 1em;
+}
+
+.Repository .tag {
+    margin: auto 1em;
+}
