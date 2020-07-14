@@ -20,11 +20,17 @@
     margin-top: .5em;
 }
 
+.Repository-list {
+    position: relative;
+}
+
 .card-footer .button {
     margin: .5em;
 }
 
 .hide {
+    position: absolute;
+    z-index: 1;
     opacity: 0;
     visibility: hidden;
     transition: opacity 600ms, visibility 600ms;
