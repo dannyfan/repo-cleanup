@@ -4,27 +4,26 @@ import Repository from "./Repository";
 const RepositoryList = (props) => {
     const [ repoList, setRepoList ] = useState({});
 
-    const getRepoList = () => {
-        const url = "https://api.github.com/user/repos?type=owner";
-        const token = props.token;
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                "Authorization": `token ${token}`,
-                "Content-Type": 'application/json'
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            setRepoList(data);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-    }
-
     useEffect(() => {
+        const getRepoList = () => {
+            const url = "https://api.github.com/user/repos?type=owner";
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    "Authorization": `token ${props.token}`,
+                    "Content-Type": 'application/json'
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                setRepoList(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
         getRepoList();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
     return (
