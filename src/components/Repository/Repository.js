@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Repository.css";
 
 const Repository = (props) => {
-    const [ hideRepo, setHideRepo ] = useState("");
+
     const formatDate = (dateString) => {
         const options = { year: "numeric", month: "long", day: "numeric" }
         return new Date(dateString).toLocaleDateString(undefined, options)
@@ -10,7 +10,7 @@ const Repository = (props) => {
 
     const user = props.data.owner.login;
     const name = props.data.name;
-    const isPrivate = props.data.private;
+    const [ isPrivate, setIsPrivate ] = useState(props.data.private);
     const tag = isPrivate ? <span className="tag is-dark">Private</span> : <span className="tag is-light">Public</span>;
     const createdAt = formatDate(props.data.created_at);
     const updatedAt = formatDate(props.data.updated_at);
@@ -28,6 +28,7 @@ const Repository = (props) => {
             })
         }).then(data => {
             console.log(data)
+            setIsPrivate(!isPrivate)
         })
         .catch(err => {
             console.log(err);
@@ -43,7 +44,6 @@ const Repository = (props) => {
             },
         }).then(data => {
             console.log(data)
-            setHideRepo("hide");
         })
         .catch(err => {
             console.log(err);
@@ -72,7 +72,7 @@ const Repository = (props) => {
                 </div>
             </div>
             <footer className="card-footer">
-                <button className="button is-primary" onClick={() => changeRepoToPrivate() }>{props.data.private ? "Make Public" : "Make Private"}</button>
+                <button className="button is-primary" onClick={() => changeRepoToPrivate() }>{ isPrivate ? "Make Public" : "Make Private"}</button>
                 <button className="button is-danger" onClick={() => deleteRepo() }>Delete</button>
                 <a className="card-footer-item" href={props.data.html_url} rel="noopener noreferrer" target="_blank">See Repository</a>
             </footer>

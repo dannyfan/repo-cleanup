@@ -3,8 +3,6 @@ import Repository from "./Repository";
 
 const RepositoryList = (props) => {
     const [ repoList, setRepoList ] = useState({});
-    const [ publicList, setPublicList ] = useState({});
-    const [ privateList, setPrivateList ] = useState({});
 
     useEffect(() => {
         const getRepoList = () => {
