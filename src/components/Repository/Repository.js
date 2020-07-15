@@ -52,33 +52,31 @@ const Repository = (props) => {
     
 
     return (
-        <li id={props.data.id} className={hideRepo}>
-            <div className="Repository card">
-                <header className="card-header">
-                    <p className="card-header-title">
-                        {name}
-                    </p>
-                    <span className="tag is-info">
-                        {props.data.language}
-                    </span>
-                    {tag}
-                </header>
-                <div className="card-content">
-                    <div className="content">
-                        <time dateTime={createdAt}>Created At: {createdAt}</time>
-                        <br/>
-                        <time dateTime={updatedAt}>Last update: {updatedAt}</time>
-                        <br/>
-                        <strong>{props.data.description}</strong>
-                    </div>
+        <div className="Repository card">
+            <header className="card-header">
+                <p className="card-header-title">
+                    {name}
+                </p>
+                <span className="tag is-info">
+                    {props.data.language}
+                </span>
+                {tag}
+            </header>
+            <div className="card-content">
+                <div className="content">
+                    <time dateTime={createdAt}>Created At: {createdAt}</time>
+                    <br/>
+                    <time dateTime={updatedAt}>Last update: {updatedAt}</time>
+                    <br/>
+                    <strong>{props.data.description}</strong>
                 </div>
-                <footer className="card-footer">
-                    <a className="button is-link card-footer-item" href={props.data.html_url} rel="noopener noreferrer" target="_blank">Link</a>
-                    <button className="button is-light" onClick={() => changeRepoToPrivate() }>{props.data.private ? "Make Public" : "Make Private"}</button>
-                    <button className="button is-danger" onClick={() => deleteRepo() }>Delete</button>
-                </footer>
             </div>
-        </li>
+            <footer className="card-footer">
+                <button className="button is-primary" onClick={() => changeRepoToPrivate() }>{props.data.private ? "Make Public" : "Make Private"}</button>
+                <button className="button is-danger" onClick={() => deleteRepo() }>Delete</button>
+                <a className="card-footer-item" href={props.data.html_url} rel="noopener noreferrer" target="_blank">See Repository</a>
+            </footer>
+        </div>
     )
 }
 

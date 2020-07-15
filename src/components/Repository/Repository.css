@@ -1,27 +1,20 @@
-.Repository {
-    max-width: 500px;
+.Repository.card {
+    width: 500px;
     margin: 1em;
+    height: 100%;
+}
+
+.Repository-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1em;
+    justify-content: center;
+    background-color: gray;
 }
 
 .Repository .tag {
     margin: auto 1em auto 0;
-}
-
-.Repository-container .title {
-    padding: 0em 1em;
-    text-align: center;
-}
-
-.Repository-container .title::after {
-    content: "";
-    display: block;
-    width: 100%;
-    border-bottom: 1px solid black;
-    margin-top: .5em;
-}
-
-.Repository-list {
-    position: relative;
 }
 
 .card-footer .button {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Repository from "./Repository";
 
 const RepositoryList = (props) => {
+    const [ repoList, setRepoList ] = useState({});
     const [ publicList, setPublicList ] = useState({});
     const [ privateList, setPrivateList ] = useState({});
 
@@ -16,12 +17,7 @@ const RepositoryList = (props) => {
                 },
             })
             .then(response => response.json())
-            .then(data => {
-                const getPrivate = Object.values(data).filter(repo => repo.private);
-                const getPublic = Object.values(data).filter(repo => !repo.private);
-                setPublicList(getPublic);
-                setPrivateList(getPrivate);
-            })
+            .then(data => setRepoList(data))
             .catch((err) => {
                 console.log(err);
             })
@@ -31,32 +27,12 @@ const RepositoryList = (props) => {
     }, []);
     
     return (
-        <div className="Repository-container columns">
-            <div className="Repository-public column">
-                <h1 className="title">Column <span className="tag is-info">Public</span></h1>
-                <ul className="Repository-list">
-                    {Object.values(publicList).map((val, key) => {
-                        return (
-                            <Repository key={ key } data={ val } token={ props.token } setList={ setPublicList }/>
-                        )
-                    })}
-                </ul>
-            </div>
-            <div className="Repository-private column">
-                <h1 className="title">Column <span className="tag is-dark">Private</span></h1>
-                <ul className="Repository-list">
-                    {Object.values(privateList).map((val, key) => {
-                        return (
-                            <Repository key={ key } data={ val } token={ props.token } setList={ setPrivateList }/>
-                        )
-                    })}
-                </ul>
-            </div>
-            <div className="Repository-delete column">
-                <h1 className="title">Column <span className="tag is-danger">Delete</span></h1>
-                <ul className="Repository-list">
-                </ul>
-            </div>
+        <div className="Repository-container">
+            {Object.values(repoList).map((val, key) => {
+                return (
+                    <Repository key={ key } data={ val } token={ props.token }/>
+                )
+            })}
         </div>
     )
 }

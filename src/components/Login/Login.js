@@ -22,7 +22,7 @@ const Login = (props) => {
 
     return (
         <>
-            <button className="button is-primary" onClick={authenicateUser}>Login</button>
+            <button className="button is-light" onClick={authenicateUser}>Login</button>
             <div>{text}</div>
         </>
     )

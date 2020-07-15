@@ -11,12 +11,11 @@ const App = () => {
       <section className="section">
         <div className="container">
           <h1 className="title">Instructions</h1>
-          <p>Authorize github login with the "login" button.</p>
-          <Login setToken={ setToken }/>
-          <p>Click make public/private or delete the repo on each repository. 
-            <br/> 
-          Or drag the repository to the appropiate column for an all at once action instead.
+          <p>Authorize github login with the "login" button to see all your repositories at once.
+            <br/>
+            <strong>Available actions: </strong> Make private repository to public, make public repository to private, delete repository.
           </p>
+          <Login setToken={ setToken }/>
         </div>
       </section>
       { token && <RepositoryList token={ token }/> }
