@@ -3,6 +3,8 @@ import netlify from 'netlify-auth-providers'
 
 const Login = (props) => {
     const [ text, setText ] = useState("");
+    const [ showButton, setShowButton ] = useState(true);
+
     const authenicateUser = () => {
         const authenticator = new netlify({
             site_id: process.env.REACT_APP_SITE_ID
@@ -17,15 +19,16 @@ const Login = (props) => {
                 return
             }
             props.setToken(data.token);
+            setShowButton(false);
         });
     }
 
-    return (
+    return showButton ? (
         <>
-            <button className="button is-light" onClick={authenicateUser}>Login</button>
+            <button className="button is-success" onClick={authenicateUser}>Login</button>
             <div>{text}</div>
         </>
-    )
+    ) : null;
 }
 
 export default Login;
