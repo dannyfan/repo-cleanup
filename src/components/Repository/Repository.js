@@ -9,6 +9,7 @@ const Repository = (props) => {
 
     const user = props.data.owner.login;
     const name = props.data.name;
+    const [deleteRepo, setDeleteRepo] = useState(false);
     const [isPrivate, setIsPrivate] = useState(props.data.private);
     const tag = isPrivate ? (
         <span className="tag is-dark">Private</span>
@@ -19,13 +20,13 @@ const Repository = (props) => {
     const updatedAt = formatDate(props.data.updated_at);
     const url = `https://api.github.com/repos/${user}/${name}`;
 
-    const changeRepoToPrivate = (confirmAction) => {
+    const updateRepo = (method, confirmAction) => {
         const confirm = confirmAction === "yes";
         const declined = confirmAction === "no";
 
         if (confirm) {
             fetch(url, {
-                method: "PATCH",
+                method: method,
                 headers: {
                     Authorization: `token ${props.token}`,
                     "Content-Type": "application/json",
@@ -34,7 +35,8 @@ const Repository = (props) => {
                     private: !isPrivate,
                 }),
             }).then((data) => {
-                setIsPrivate(!isPrivate);
+                if (method === "PATCH") setIsPrivate(!isPrivate);
+                if (method === "DELETE") setDeleteRepo(true); 
                 props.setShowModal(false);
             }).catch((err) => {
                 console.log(err);
@@ -44,30 +46,15 @@ const Repository = (props) => {
         } else {
             props.setSelectedRepo({
                 name: name,
-                action: !isPrivate,
-                callback: changeRepoToPrivate,
+                action: "delete",
+                method: method,
+                callback: updateRepo,
             });
             props.setShowModal(true);
         }
     };
 
-    const deleteRepo = () => {
-        fetch(url, {
-            method: "DELETE",
-            headers: {
-                Authorization: `token ${props.token}`,
-                "Content-Type": "application/json",
-            },
-        })
-            .then((data) => {
-                console.log(data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-
-    return (
+    return deleteRepo ? null : (
         <div className="Repository card">
             <header className="card-header">
                 <p className="card-header-title">{name}</p>
@@ -86,13 +73,13 @@ const Repository = (props) => {
             <footer className="card-footer">
                 <button
                     className={`button ${isPrivate ? "is-light" : "is-dark"}`}
-                    onClick={() => changeRepoToPrivate()}
+                    onClick={() => updateRepo("PATCH")}
                 >
                     {isPrivate ? "Make Public" : "Make Private"}
                 </button>
                 <button
                     className="button is-danger"
-                    onClick={() => deleteRepo()}
+                    onClick={() => updateRepo("DELETE")}
                 >
                     Delete
                 </button>

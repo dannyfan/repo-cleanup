@@ -4,7 +4,7 @@ const Modal = (props) => {
     const actions = {
         true: `Are you sure you want to make <strong>${props.repo.name} private</strong>?`,
         false: `Are you sure you want to make <strong>${props.repo.name} public</strong>?`,
-        delete: `Are you sure you want to <strong>delete ${props.repo.name}?</strong>?`,
+        delete: `Are you sure you want to <strong>delete ${props.repo.name}</strong>?`,
     };
     const actionText = actions[props.repo.action];
     return (
@@ -23,7 +23,7 @@ const Modal = (props) => {
                     <button
                         className="button is-success"
                         onClick={() => {
-                            props.repo.callback("yes");
+                            props.repo.callback(props.repo.method, "yes");
                         }}
                     >
                         Yes
@@ -31,7 +31,7 @@ const Modal = (props) => {
                     <button
                         className="button"
                         onClick={() => {
-                            props.repo.callback("no");
+                            props.repo.callback(props.repo.method, "no");
                         }}
                     >
                         No
