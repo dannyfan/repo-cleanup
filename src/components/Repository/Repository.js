@@ -23,6 +23,7 @@ const Repository = (props) => {
     const updateRepo = (method, confirmAction) => {
         const confirm = confirmAction === "yes";
         const declined = confirmAction === "no";
+        const action = method === "DELETE" ? "delete" : !isPrivate;
 
         if (confirm) {
             fetch(url, {
@@ -46,7 +47,7 @@ const Repository = (props) => {
         } else {
             props.setSelectedRepo({
                 name: name,
-                action: "delete",
+                action: action,
                 method: method,
                 callback: updateRepo,
             });
